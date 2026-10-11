@@ -6,4 +6,6 @@ export class Plant {
     id: number;
     @Column()
     name: string;
+    @Column()
+    nameLatin: string;
 }

@@ -1,5 +1,5 @@
 import {Injectable} from "@nestjs/common";
-import {Repository} from "typeorm";
+import {InsertResult, Repository, UpdateResult} from "typeorm";
 import {Plant} from "./plant.entity.js";
 import {InjectRepository} from "@nestjs/typeorm";
 import {PlantDto} from "./plant.dto.js";
@@ -13,7 +13,11 @@ export class PlantService {
         return this.plantRepository.find();
     }
 
-    create(plant: PlantDto): Promise<Plant> {
-        return this.plantRepository.save(plant);
+    create(plant: PlantDto): Promise<InsertResult> {
+        return this.plantRepository.insert(plant);
+    }
+
+    update(id: number, plant: PlantDto): Promise<UpdateResult> {
+        return this.plantRepository.update(id, plant);
     }
 }
