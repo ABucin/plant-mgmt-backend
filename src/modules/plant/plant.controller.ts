@@ -3,14 +3,15 @@ import {Plant} from "./plant.entity.js";
 import {PlantService} from "./plant.service.js";
 import {PlantDto} from "./plant.dto.js";
 import {InsertResult, UpdateResult} from "typeorm";
+import {ResponseDto} from "../utils/response.dto.js";
 
-@Controller('plant')
+@Controller('api/v1/plant')
 export class PlantController {
     @Inject(PlantService)
     private readonly plantService: PlantService;
 
     @Get()
-    getPlants(): Promise<Plant[]> {
+    getPlants(): Promise<ResponseDto<Plant>> {
         return this.plantService.findAll();
     }
 
