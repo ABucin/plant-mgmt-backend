@@ -8,4 +8,6 @@ export class Plant {
     name: string;
     @Column()
     nameLatin: string;
+    @Column({ type: "timestamp", precision: 6, nullable: true })
+    wateredOn: Date;
 }

@@ -1,9 +1,9 @@
 import {Body, Controller, Get, Inject, Param, Post, Put} from "@nestjs/common";
 import {RoomService} from "./room.service.js";
 import {ResponseDto} from "../../utils/response.dto.js";
-import {Room} from "./room.entity.js";
 import {InsertResult} from "typeorm";
 import type {RoomDto} from "./room.dto.js";
+import {Room} from "./room.entity.js";
 
 @Controller('api/v1/room')
 export class RoomController {
@@ -11,12 +11,12 @@ export class RoomController {
     private readonly roomService: RoomService;
 
     @Get()
-    getRooms(): Promise<ResponseDto<Room>> {
+    getRooms(): Promise<ResponseDto<RoomDto>> {
         return this.roomService.findAll();
     }
 
     @Post()
-    createRoom(@Body() room: RoomDto): Promise<InsertResult> {
+    createRoom(@Body() room: RoomDto): Promise<Room> {
         return this.roomService.create(room);
     }
 
