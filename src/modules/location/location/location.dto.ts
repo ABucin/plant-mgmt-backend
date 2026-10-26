@@ -1,6 +1,6 @@
 import {RoomDto} from "../room/room.dto.js";
 
-export class HouseDto {
+export class LocationDto {
     name: string;
     rooms: RoomDto[];
 }

@@ -2,11 +2,11 @@ import {Column, Entity, OneToMany, PrimaryGeneratedColumn, type Relation} from "
 import {Room} from "../room/room.entity.js";
 
 @Entity()
-export class House {
+export class Location {
     @PrimaryGeneratedColumn()
     id: number;
     @Column()
     name: string;
-    @OneToMany(() => Room, (room) => room.house, {cascade: true})
+    @OneToMany(() => Room, (room) => room.location, {cascade: true})
     rooms: Relation<Room[]>;
 }

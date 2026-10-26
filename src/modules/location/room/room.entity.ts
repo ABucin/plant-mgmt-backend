@@ -1,5 +1,5 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn, type Relation} from "typeorm";
-import {House} from "../house/house.entity.js";
+import {Location} from "../location/location.entity.js";
 
 @Entity()
 export class Room {
@@ -15,6 +15,6 @@ export class Room {
         default: 20
     })
     temperature: number;
-    @ManyToOne(() => House, (house) => house.rooms, {onDelete: "CASCADE"})
-    house: Relation<House>;
+    @ManyToOne(() => Location, (location) => location.rooms, {onDelete: "CASCADE"})
+    location: Relation<Location>;
 }

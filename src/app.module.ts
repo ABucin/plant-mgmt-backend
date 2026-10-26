@@ -3,10 +3,10 @@ import {AppController} from './app.controller.js';
 import {AppService} from './app.service.js';
 import {PlantModule} from "./modules/plant/plant.module.js";
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {HouseModule} from "./modules/house/house.module.js";
+import {LocationModule} from "./modules/location/location.module.js";
 
 @Module({
-    imports: [PlantModule, HouseModule, TypeOrmModule.forRoot({
+    imports: [PlantModule, LocationModule, TypeOrmModule.forRoot({
         type: 'mysql',
         host: 'localhost',
         port: 3306,
