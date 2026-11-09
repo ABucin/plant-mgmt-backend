@@ -11,7 +11,11 @@ export class PlantService {
     private repository: Repository<Plant>;
 
     async findAll(): Promise<ResponseDto<PlantDto>> {
-        const repositoryData = await this.repository.findAndCount();
+        const repositoryData = await this.repository.findAndCount({
+            relations: {
+                room: true,
+            }
+        });
         return {
             count: repositoryData[1],
             data: repositoryData[0].map((this.toDto)),
@@ -30,8 +34,9 @@ export class PlantService {
     private toDto(plant: Plant): PlantDto {
         return {
             name: plant.name,
-            nameLatin: plant.nameLatin,
-            wateredOn: plant.wateredOn
+            scientificName: plant.scientificName,
+            wateredOn: plant.wateredOn,
+            room: plant.room,
         };
     }
 }

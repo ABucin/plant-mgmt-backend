@@ -1,7 +1,6 @@
 import {Body, Controller, Get, Inject, Param, Post, Put} from "@nestjs/common";
 import {RoomService} from "./room.service.js";
 import {ResponseDto} from "../../utils/response.dto.js";
-import {InsertResult} from "typeorm";
 import type {RoomDto} from "./room.dto.js";
 import {Room} from "./room.entity.js";
 

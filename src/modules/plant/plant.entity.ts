@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, PrimaryGeneratedColumn, type Relation} from "typeorm";
+import {Room} from "../location/room/room.entity.js";
 
 @Entity()
 export class Plant {
@@ -7,7 +8,9 @@ export class Plant {
     @Column()
     name: string;
     @Column()
-    nameLatin: string;
-    @Column({ type: "timestamp", precision: 6, nullable: true })
+    scientificName: string;
+    @Column({type: "timestamp", precision: 6, nullable: true})
     wateredOn: Date;
+    @ManyToOne(() => Room, (room) => room.plants, {onDelete: "CASCADE"})
+    room: Relation<Room>
 }
