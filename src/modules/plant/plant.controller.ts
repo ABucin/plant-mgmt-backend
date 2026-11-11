@@ -10,6 +10,11 @@ export class PlantController {
     @Inject(PlantService)
     private readonly plantService: PlantService;
 
+    @Get(':id')
+    getPlant(@Param('id') id: number): Promise<PlantDto | null> {
+        return this.plantService.findById(id);
+    }
+
     @Get()
     getPlants(): Promise<ResponseDto<PlantDto>> {
         return this.plantService.findAll();

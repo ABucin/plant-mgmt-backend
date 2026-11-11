@@ -10,6 +10,11 @@ export class PlantService {
     @InjectRepository(Plant)
     private repository: Repository<Plant>;
 
+    async findById(id: number): Promise<PlantDto | null> {
+        const repositoryData = await this.repository.findOneBy({ id });
+        return repositoryData ? this.toDto(repositoryData) : null;
+    }
+
     async findAll(): Promise<ResponseDto<PlantDto>> {
         const repositoryData = await this.repository.findAndCount({
             relations: {
@@ -33,6 +38,7 @@ export class PlantService {
 
     private toDto(plant: Plant): PlantDto {
         return {
+            id: plant.id,
             name: plant.name,
             scientificName: plant.scientificName,
             wateredOn: plant.wateredOn,
