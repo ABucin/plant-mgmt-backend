@@ -9,6 +9,11 @@ export class LocationController {
     @Inject(LocationService)
     private readonly locationService: LocationService;
 
+    @Get(':id')
+    getLocation(@Param('id') id: number): Promise<LocationDto> {
+        return this.locationService.findById(id);
+    }
+
     @Get()
     getLocations(): Promise<ResponseDto<LocationDto>> {
         return this.locationService.findAll();

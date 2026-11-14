@@ -9,6 +9,11 @@ export class RoomController {
     @Inject(RoomService)
     private readonly roomService: RoomService;
 
+    @Get(':id')
+    getRoom(@Param('id') id: number): Promise<RoomDto> {
+        return this.roomService.findById(id);
+    }
+
     @Get()
     getRooms(): Promise<ResponseDto<RoomDto>> {
         return this.roomService.findAll();

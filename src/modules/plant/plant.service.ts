@@ -4,15 +4,19 @@ import {Plant} from "./plant.entity.js";
 import {InjectRepository} from "@nestjs/typeorm";
 import {PlantDto} from "./plant.dto.js";
 import {ResponseDto} from "../utils/response.dto.js";
+import {EntityNotFoundException} from "../utils/exceptions.js";
 
 @Injectable()
 export class PlantService {
     @InjectRepository(Plant)
     private repository: Repository<Plant>;
 
-    async findById(id: number): Promise<PlantDto | null> {
-        const repositoryData = await this.repository.findOneBy({ id });
-        return repositoryData ? this.toDto(repositoryData) : null;
+    async findById(id: number): Promise<PlantDto> {
+        const repositoryData = await this.repository.findOneBy({id});
+        if (!repositoryData) {
+            throw new EntityNotFoundException();
+        }
+        return this.toDto(repositoryData);
     }
 
     async findAll(): Promise<ResponseDto<PlantDto>> {

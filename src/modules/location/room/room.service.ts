@@ -4,11 +4,22 @@ import {Room} from "./room.entity.js";
 import {InjectRepository} from "@nestjs/typeorm";
 import {ResponseDto} from "../../utils/response.dto.js";
 import {RoomDto} from "./room.dto.js";
+import {EntityNotFoundException} from "../../utils/exceptions.js";
 
 @Injectable()
 export class RoomService {
     @InjectRepository(Room)
     private repository: Repository<Room>;
+
+    async findById(id: number): Promise<RoomDto> {
+        const repositoryData = await this.repository.findOneBy({id});
+
+        if (!repositoryData) {
+            throw new EntityNotFoundException();
+        }
+
+        return this.toDto(repositoryData);
+    }
 
     async findAll(): Promise<ResponseDto<RoomDto>> {
         const repositoryData = await this.repository.findAndCount({
@@ -16,6 +27,10 @@ export class RoomService {
                 location: true,
             }
         });
+
+        if (!repositoryData) {
+            throw new EntityNotFoundException();
+        }
 
         return {
             count: repositoryData[1],
