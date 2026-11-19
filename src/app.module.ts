@@ -5,9 +5,10 @@ import {PlantModule} from "./modules/plant/plant.module.js";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {LocationModule} from "./modules/location/location.module.js";
 import {ConfigModule, ConfigService} from "@nestjs/config";
+import {FeatureModule} from "./modules/feature/feature.module.js";
 
 @Module({
-    imports: [PlantModule, LocationModule,
+    imports: [PlantModule, LocationModule, FeatureModule,
         ConfigModule.forRoot({
             isGlobal: true,
         }),
